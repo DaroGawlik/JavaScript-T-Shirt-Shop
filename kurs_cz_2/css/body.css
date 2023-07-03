@@ -1,0 +1,175 @@
+.main__wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  max-height: 270px;
+}
+.main__wrapper .main__wrapper--tShirtFront,
+.main__wrapper .main__wrapper--tShirtFBack {
+  position: relative;
+}
+.main__wrapper .main__wrapper--tShirtFront .main__wrapper--tShirtLoremPiscum,
+.main__wrapper .main__wrapper--tShirtFBack .main__wrapper--tShirtLoremPiscum {
+  position: absolute;
+  height: 100px;
+  width: 100px;
+  top: 45%;
+  left: 48%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+.main__wrapper .main__wrapper--imprintPanel {
+  width: 200px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin-left: 2rem;
+  font-size: 1.5rem;
+}
+.main__wrapper .main__wrapper--imprintPanel > div {
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+}
+.main__wrapper .main__wrapper--imprintPanel > div:first-child {
+  text-align: center;
+}
+.main__wrapper .main__wrapper--imprintPanel input[type=checkbox] {
+  margin-left: 1rem;
+  margin-right: 10px;
+}
+
+nav {
+  height: 10%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+nav .nav__button {
+  font-size: 2.5rem;
+}
+
+footer {
+  display: none;
+  position: relative;
+  height: 25%;
+}
+footer .footer__wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  height: 70%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+footer .footer__wrapper .footer__wrapper--tShirtFront {
+  display: none;
+}
+footer .footer__wrapper .footer__wrapper--tShirtBack {
+  display: none;
+}
+footer .footer__wrapper .footer__wrapper--resumePanel {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin: 0 1rem 0 1rem;
+  font-size: 2rem;
+}
+
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  height: 100vh;
+}
+
+h1 {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.carousel {
+  width: 100vw;
+  height: 65%;
+  position: relative;
+}
+.carousel header {
+  height: 20%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  border-bottom: 1px solid black;
+  font-size: 3rem;
+}
+.carousel article {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  z-index: 0;
+  -webkit-transition: opacity 200ms ease-in-out;
+  transition: opacity 200ms ease-in-out;
+}
+.carousel [article-active] {
+  opacity: 1;
+  z-index: 1;
+  -webkit-transition-delay: 200ms;
+          transition-delay: 200ms;
+}
+.carousel main {
+  position: relative;
+  height: 80%;
+}
+.carousel main .main__wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  border-radius: 0.25rem;
+  padding: 0 0.5rem;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+button:disabled {
+  cursor: not-allowed;
+}/*# sourceMappingURL=body.css.map */

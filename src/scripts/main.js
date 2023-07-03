@@ -1,51 +1,23 @@
-import '../styles/main.scss'
-import ChoosingImprint from './views/ChoosingImprint.js'
-import ChoosingGraphic from './views/ChoosingGraphic.js'
+import '../styles/body.scss'
 
-/// MAIN
+import './body/choosingImprint.js'
+import '../scripts/body/objects/Tshirt.js'
+import './body/nav.js'
+import './body/footer.js'
+import { getPhoto } from './body/api/loremPicsum'
 
-///SPA MODULE
-const navigateTo = url => {
-	history.pushState(null, null, url)
-	router()
+import { Tshirt } from './body/objects/Tshirt'
+
+let isCheckFront
+let isCheckBack
+let currentPrice
+
+const orderOfTshirtsArr = []
+
+getPhoto()
+
+export function cautchingChecksBoxesToMain(isCheckFront, isCheckBack) {
+	isCheckFront = isCheckFront
+	isCheckBack = isCheckBack
+	currentPrice = (isCheckFront + isCheckBack) * 10
 }
-
-const router = async () => {
-	const routes = [
-		{ path: '/ChoosingImprint', view: ChoosingImprint },
-		{ path: '/ChoosingGraphic', view: ChoosingGraphic },
-	]
-	const potentialMatches = routes.map(route => {
-		console.log(location.pathname)
-		console.log(route.path)
-		return {
-			route: route,
-			isMatch: location.pathname === route.path,
-		}
-	})
-
-	let match = potentialMatches.find(potentialMatches => potentialMatches.isMatch)
-
-	if (!match) {
-		match = {
-			route: routes[0],
-			isMatch: true,
-		}
-	}
-
-	const view = new match.route.view()
-
-	console.log(view)
-}
-/// FOOTER
-
-window.addEventListener('popstate', router)
-document.addEventListener('DOMContentLoaded', () => {
-	document.body.addEventListener('click', e => {
-		if (e.target.matches('[data-link]')) {
-			e.preventDefault()
-			navigateTo(e.target.href)
-		}
-	})
-	router()
-})

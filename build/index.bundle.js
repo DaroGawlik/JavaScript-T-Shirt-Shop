@@ -1,22 +1,286 @@
-/*
- * ATTENTION: The "eval" devtool has been used (maybe by default in mode: "development").
- * This devtool is neither made for production nor for readable output files.
- * It uses "eval()" calls to create a separate source file in the browser devtools.
- * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
- * or disable the default devtool with "devtool: false".
- * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
- */
 /******/ (() => { // webpackBootstrap
-/******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./src/styles/main.scss":
+/***/ "./src/styles/body.scss":
 /*!******************************!*\
-  !*** ./src/styles/main.scss ***!
+  !*** ./src/styles/body.scss ***!
   \******************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n// extracted by mini-css-extract-plugin\n\n\n//# sourceURL=webpack:///./src/styles/main.scss?");
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/scripts/body/api/loremPicsum.js":
+/*!*********************************************!*\
+  !*** ./src/scripts/body/api/loremPicsum.js ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   getPhoto: () => (/* binding */ getPhoto)
+/* harmony export */ });
+/* harmony import */ var _choosingImprint_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../choosingImprint.js */ "./src/scripts/body/choosingImprint.js");
+
+
+function getPhoto() {
+	fetch('https://picsum.photos/500/300')
+		.then(response => response.blob())
+		.then(blob => {
+			const imageUrl = URL.createObjectURL(blob)
+			const image = document.createElement('img')
+			image.src = imageUrl
+			image.alt = 'Lorem Picsum'
+			;(0,_choosingImprint_js__WEBPACK_IMPORTED_MODULE_0__.cautchingPhotoToChoosingImprint)(image)
+		})
+		.catch(error => {
+			console.error('Error:', error)
+		})
+}
+
+
+/***/ }),
+
+/***/ "./src/scripts/body/choosingImprint.js":
+/*!*********************************************!*\
+  !*** ./src/scripts/body/choosingImprint.js ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   cautchingPhotoToChoosingImprint: () => (/* binding */ cautchingPhotoToChoosingImprint)
+/* harmony export */ });
+/* harmony import */ var _main_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../main.js */ "./src/scripts/main.js");
+/* harmony import */ var _footer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./footer.js */ "./src/scripts/body/footer.js");
+
+
+
+const checkFront = document.querySelector('#checkFront')
+const checkBack = document.querySelector('#checkBack')
+const checkBoth = document.querySelector('#checkBoth')
+
+const tShirtFrontLoremPiscum = document.querySelector('.main__wrapper--tShirtFront')
+const tShirtBackLoremPiscum = document.querySelector('.main__wrapper--tShirtFBack')
+
+let loremPiscumFront
+let loremPiscumBack
+
+let isCheckFront = false
+let isCheckBack = false
+
+function toggleFront() {
+	isCheckFront = !isCheckFront
+	isCheckBoth()
+}
+
+function toggleBack() {
+	isCheckBack = !isCheckBack
+	isCheckBoth()
+}
+
+function toggleBoth() {
+	isCheckFront = !isCheckFront || !isCheckBack
+	isCheckBack = isCheckFront
+	checkFront.checked = isCheckFront
+	checkBack.checked = isCheckBack
+	isCheckBoth()
+}
+
+function isCheckBoth() {
+	toggleFrontTshit()
+	toggleBackTshit()
+	checkBoth.checked = isCheckFront && isCheckBack
+	;(0,_main_js__WEBPACK_IMPORTED_MODULE_0__.cautchingChecksBoxesToMain)(isCheckFront, isCheckBack)
+	;(0,_footer_js__WEBPACK_IMPORTED_MODULE_1__.cautchingChecksBoxesToFooter)(isCheckFront, isCheckBack)
+}
+
+const cautchingPhotoToChoosingImprint = image => {
+	loremPiscumFront = image.cloneNode(true)
+	loremPiscumBack = image.cloneNode(true)
+}
+function toggleFrontTshit() {
+	if (isCheckFront) {
+		if (!tShirtFrontLoremPiscum.contains(loremPiscumFront)) {
+			tShirtFrontLoremPiscum.appendChild(loremPiscumFront)
+			loremPiscumFront.classList.add('main__wrapper--tShirtLoremPiscum')
+		}
+	} else {
+		if (tShirtFrontLoremPiscum.contains(loremPiscumFront)) {
+			tShirtFrontLoremPiscum.removeChild(loremPiscumFront)
+		}
+	}
+}
+function toggleBackTshit() {
+	if (isCheckBack) {
+		if (!tShirtBackLoremPiscum.contains(loremPiscumBack)) {
+			tShirtBackLoremPiscum.appendChild(loremPiscumBack)
+			loremPiscumBack.classList.add('main__wrapper--tShirtLoremPiscum')
+		}
+	} else {
+		if (tShirtBackLoremPiscum.contains(loremPiscumBack)) {
+			tShirtBackLoremPiscum.removeChild(loremPiscumBack)
+		}
+	}
+}
+checkFront.addEventListener('click', toggleFront)
+checkBack.addEventListener('click', toggleBack)
+checkBoth.addEventListener('click', toggleBoth)
+
+
+/***/ }),
+
+/***/ "./src/scripts/body/footer.js":
+/*!************************************!*\
+  !*** ./src/scripts/body/footer.js ***!
+  \************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   cautchingChecksBoxesToFooter: () => (/* binding */ cautchingChecksBoxesToFooter)
+/* harmony export */ });
+const footer = document.querySelector('footer')
+const tShirtFront = document.querySelector('.footer__wrapper--tShirtFront')
+const tShirtBack = document.querySelector('.footer__wrapper--tShirtBack')
+const resumePanel = document.querySelector('.footer__wrapper--resumePanel')
+
+let isCheckFront
+let isCheckBack
+let currentPrice
+
+function cautchingChecksBoxesToFooter(isCheckFront, isCheckBack) {
+	isCheckFront = isCheckFront
+	isCheckBack = isCheckBack
+	currentPrice = (isCheckFront + isCheckBack) * 10
+
+	if (isCheckFront || isCheckBack) {
+		footer.style.display = 'flex'
+	} else {
+		footer.style.display = 'none'
+	}
+	addFrontTshirt(isCheckFront)
+	addBackTshirt(isCheckBack)
+	showCurrentPrice(currentPrice)
+}
+
+const addFrontTshirt = isCheckFront => {
+	if (isCheckFront) {
+		tShirtFront.style.display = 'flex'
+	} else {
+		tShirtFront.style.display = 'none'
+	}
+}
+const addBackTshirt = isCheckBack => {
+	if (isCheckBack) {
+		tShirtBack.style.display = 'flex'
+	} else {
+		tShirtBack.style.display = 'none'
+	}
+}
+
+const showCurrentPrice = currentPrice => {
+	const priceElement = resumePanel.querySelector('span')
+	priceElement.textContent = currentPrice
+}
+
+
+/***/ }),
+
+/***/ "./src/scripts/body/nav.js":
+/*!*********************************!*\
+  !*** ./src/scripts/body/nav.js ***!
+  \*********************************/
+/***/ (() => {
+
+const buttonPrev = document.querySelector('.nav__button--prev')
+const buttonNext = document.querySelector('.nav__button--next')
+
+const slides = document.querySelector('.slides')
+const articles = slides.querySelectorAll('article')
+
+let currentIndex = 0
+
+buttonPrev.addEventListener('click', () => {
+	if (currentIndex > 0) {
+		currentIndex--
+		updateCarousel()
+	}
+})
+
+buttonNext.addEventListener('click', () => {
+	if (currentIndex < articles.length - 1) {
+		currentIndex++
+		updateCarousel()
+	}
+})
+
+function updateCarousel() {
+	articles.forEach((article, index) => {
+		if (index === currentIndex) {
+			article.setAttribute('article-active', '')
+		} else {
+			article.removeAttribute('article-active')
+		}
+		buttonPrevDisabled()
+		buttonNextDisabled()
+	})
+}
+
+function buttonPrevDisabled() {
+	if (currentIndex === 0) {
+		buttonPrev.disabled = true
+	} else {
+		buttonPrev.disabled = false
+	}
+}
+function buttonNextDisabled() {
+	if (currentIndex === articles.length - 1) {
+		buttonNext.disabled = true
+	} else {
+		buttonNext.disabled = false
+	}
+}
+
+window.addEventListener('load', event => {
+	updateCarousel()
+})
+
+
+/***/ }),
+
+/***/ "./src/scripts/body/objects/Tshirt.js":
+/*!********************************************!*\
+  !*** ./src/scripts/body/objects/Tshirt.js ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Tshirt: () => (/* binding */ Tshirt)
+/* harmony export */ });
+class Tshirt {
+	constructor(isCheckFront, isCheckBack) {
+		this.front = isCheckFront
+		this.back = isCheckBack
+	}
+
+	updateFront(isCheckFront) {
+		this.front = isCheckFront
+	}
+	updateBack(isCheckBack) {
+		this.back = isCheckBack
+	}
+}
+
 
 /***/ }),
 
@@ -26,37 +290,42 @@ eval("__webpack_require__.r(__webpack_exports__);\n// extracted by mini-css-extr
   \*****************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _styles_main_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../styles/main.scss */ \"./src/styles/main.scss\");\n/* harmony import */ var _views_ChoosingImprint_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./views/ChoosingImprint.js */ \"./src/scripts/views/ChoosingImprint.js\");\n/* harmony import */ var _views_ChoosingGraphic_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./views/ChoosingGraphic.js */ \"./src/scripts/views/ChoosingGraphic.js\");\n\r\n\r\n\r\n\r\n/// MAIN\r\n\r\n///SPA MODULE\r\nconst navigateTo = url => {\r\n\thistory.pushState(null, null, url)\r\n\trouter()\r\n}\r\n\r\nconst router = async () => {\r\n\tconst routes = [\r\n\t\t{ path: '/ChoosingImprint', view: _views_ChoosingImprint_js__WEBPACK_IMPORTED_MODULE_1__[\"default\"] },\r\n\t\t{ path: '/ChoosingGraphic', view: _views_ChoosingGraphic_js__WEBPACK_IMPORTED_MODULE_2__[\"default\"] },\r\n\t]\r\n\tconst potentialMatches = routes.map(route => {\r\n\t\tconsole.log(location.pathname)\r\n\t\tconsole.log(route.path)\r\n\t\treturn {\r\n\t\t\troute: route,\r\n\t\t\tisMatch: location.pathname === route.path,\r\n\t\t}\r\n\t})\r\n\r\n\tlet match = potentialMatches.find(potentialMatches => potentialMatches.isMatch)\r\n\r\n\tif (!match) {\r\n\t\tmatch = {\r\n\t\t\troute: routes[0],\r\n\t\t\tisMatch: true,\r\n\t\t}\r\n\t}\r\n\r\n\tconst view = new match.route.view()\r\n\r\n\tconsole.log(view)\r\n}\r\n/// FOOTER\r\n\r\nwindow.addEventListener('popstate', router)\r\ndocument.addEventListener('DOMContentLoaded', () => {\r\n\tdocument.body.addEventListener('click', e => {\r\n\t\tif (e.target.matches('[data-link]')) {\r\n\t\t\te.preventDefault()\r\n\t\t\tnavigateTo(e.target.href)\r\n\t\t}\r\n\t})\r\n\trouter()\r\n})\r\n\n\n//# sourceURL=webpack:///./src/scripts/main.js?");
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   cautchingChecksBoxesToMain: () => (/* binding */ cautchingChecksBoxesToMain)
+/* harmony export */ });
+/* harmony import */ var _styles_body_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../styles/body.scss */ "./src/styles/body.scss");
+/* harmony import */ var _body_choosingImprint_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./body/choosingImprint.js */ "./src/scripts/body/choosingImprint.js");
+/* harmony import */ var _scripts_body_objects_Tshirt_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./body/objects/Tshirt */ "./src/scripts/body/objects/Tshirt.js");
+/* harmony import */ var _body_nav_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./body/nav.js */ "./src/scripts/body/nav.js");
+/* harmony import */ var _body_nav_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_body_nav_js__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _body_footer_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./body/footer.js */ "./src/scripts/body/footer.js");
+/* harmony import */ var _body_api_loremPicsum__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./body/api/loremPicsum */ "./src/scripts/body/api/loremPicsum.js");
 
-/***/ }),
 
-/***/ "./src/scripts/views/AbstractView.js":
-/*!*******************************************!*\
-  !*** ./src/scripts/views/AbstractView.js ***!
-  \*******************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (class {\r\n\tconstructor() {}\r\n\r\n\tsetTitle(title) {\r\n\t\tdocument.title = title\r\n\t}\r\n\r\n\tasync getHtml() {\r\n\t\treturn ''\r\n\t}\r\n});\r\n\n\n//# sourceURL=webpack:///./src/scripts/views/AbstractView.js?");
 
-/***/ }),
 
-/***/ "./src/scripts/views/ChoosingGraphic.js":
-/*!**********************************************!*\
-  !*** ./src/scripts/views/ChoosingGraphic.js ***!
-  \**********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ ChoosingGraphic)\n/* harmony export */ });\n/* harmony import */ var _AbstractView_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AbstractView.js */ \"./src/scripts/views/AbstractView.js\");\n\r\n\r\nclass ChoosingGraphic extends _AbstractView_js__WEBPACK_IMPORTED_MODULE_0__[\"default\"] {\r\n\tconstructor() {\r\n\t\tsuper()\r\n\t\tthis.setTitle('Choosing Graphic')\r\n\t}\r\n\r\n\tasync getHtml() {\r\n\t\treturn '<h1>Choosing Graphic</h1>'\r\n\t}\r\n}\r\n\n\n//# sourceURL=webpack:///./src/scripts/views/ChoosingGraphic.js?");
 
-/***/ }),
 
-/***/ "./src/scripts/views/ChoosingImprint.js":
-/*!**********************************************!*\
-  !*** ./src/scripts/views/ChoosingImprint.js ***!
-  \**********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ ChoosingImprint)\n/* harmony export */ });\n/* harmony import */ var _AbstractView_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AbstractView.js */ \"./src/scripts/views/AbstractView.js\");\n\r\n\r\nclass ChoosingImprint extends _AbstractView_js__WEBPACK_IMPORTED_MODULE_0__[\"default\"] {\r\n\tconstructor() {\r\n\t\tsuper()\r\n\t\tthis.setTitle('Choosing Imprint')\r\n\t}\r\n\r\n\tasync getHtml() {\r\n\t\treturn '<h1>Choosing Imprint</h1>'\r\n\t}\r\n}\r\n\n\n//# sourceURL=webpack:///./src/scripts/views/ChoosingImprint.js?");
+
+let isCheckFront
+let isCheckBack
+let currentPrice
+
+const orderOfTshirtsArr = []
+
+;(0,_body_api_loremPicsum__WEBPACK_IMPORTED_MODULE_5__.getPhoto)()
+
+function cautchingChecksBoxesToMain(isCheckFront, isCheckBack) {
+	isCheckFront = isCheckFront
+	isCheckBack = isCheckBack
+	currentPrice = (isCheckFront + isCheckBack) * 10
+}
+
 
 /***/ })
 
@@ -87,6 +356,18 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 	}
 /******/ 	
 /************************************************************************/
+/******/ 	/* webpack/runtime/compat get default export */
+/******/ 	(() => {
+/******/ 		// getDefaultExport function for compatibility with non-harmony modules
+/******/ 		__webpack_require__.n = (module) => {
+/******/ 			var getter = module && module.__esModule ?
+/******/ 				() => (module['default']) :
+/******/ 				() => (module);
+/******/ 			__webpack_require__.d(getter, { a: getter });
+/******/ 			return getter;
+/******/ 		};
+/******/ 	})();
+/******/ 	
 /******/ 	/* webpack/runtime/define property getters */
 /******/ 	(() => {
 /******/ 		// define getter functions for harmony exports
@@ -119,8 +400,9 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 	
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
-/******/ 	// This entry module can't be inlined because the eval devtool is used.
+/******/ 	// This entry module is referenced by other modules so it can't be inlined
 /******/ 	var __webpack_exports__ = __webpack_require__("./src/scripts/main.js");
 /******/ 	
 /******/ })()
 ;
+//# sourceMappingURL=index.bundle.js.map

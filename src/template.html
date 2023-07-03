@@ -9,19 +9,55 @@
 
 </head>
 
-
-
 <body>
-    <header></header>
-    <main>
-        <section>
-            <div class="">
-                <canvas id="canvasFront">canvas</canvas>
-                <canvas id="canvasBack">canvas</canvas>
+    <h1>create and design t-shirts online</h1>
+    <section class="carousel slides">
+        <article style="background-color:powderblue;">
+            <header>Where Do You Want Your Imprint?</header>
+            <main>
+                <div class="main__wrapper">
+                    <div class="main__wrapper--tShirtFront">
+                        <img src="/src/T-Shirts-img/T-Shirt-Front.png" alt="t-shirt front view">
+                    </div>
+                    <div class="main__wrapper--tShirtFBack">
+                        <img src="/src/T-Shirts-img/T-Shirt-Back.png" alt="t-shirt back view">
+                    </div>
+                    <div class="main__wrapper--imprintPanel">
+                        <div>Where do You want your print?</div>
+                        <div><input type="checkbox" id="checkFront">Front</div>
+                        <div><input type="checkbox" id="checkBack">Back</div>
+                        <div><input type="checkbox" id="checkBoth">Both</div>
+                    </div>
+                </div>
+            </main>
+        </article>
+        <article style="background-color:red;">
+            <header>Choosing Graphic</header>
+        </article>
+        <article style="background-color:green;">
+            <header>detalis form</header>
+        </article>
+        <article style="background-color:blue;">
+            <header>order summary</header>
+        </article>
+        <article style="background-color:violet;">
+            <header>thnak you</header>
+        </article>
+    </section>
+    <nav>
+        <button class="nav__button nav__button--prev">Previous</button>
+        <button class="nav__button nav__button--next">Next</button>
+    </nav>
+    <footer>
+        <div class="footer__wrapper">
+            <img src="/src/T-Shirts-img/T-Shirt-Front.png" class="footer__wrapper--tShirtFront"
+                alt="t-shirt front view">
+            <img src="/src/T-Shirts-img/T-Shirt-Back.png" class="footer__wrapper--tShirtBack" alt="t-shirt back view">
+            <div class="footer__wrapper--resumePanel">
+                <p>Price: <span></span>U</p>
             </div>
-        </section>
-    </main>
-    <aside></aside>
+        </div>
+    </footer>
 </body>
 
 </html>

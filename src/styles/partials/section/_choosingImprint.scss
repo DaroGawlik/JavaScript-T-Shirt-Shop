@@ -1,0 +1,40 @@
+.main__wrapper {
+	display: flex;
+	max-height: 270px;
+
+	.main__wrapper--tShirtFront,
+	.main__wrapper--tShirtFBack {
+		position: relative;
+
+		.main__wrapper--tShirtLoremPiscum {
+			position: absolute;
+			height: 100px;
+			width: 100px;
+			top: 45%;
+			left: 48%;
+			transform: translate(-50%, -50%);
+		}
+	}
+
+	.main__wrapper--imprintPanel {
+		width: 200px;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		margin-left: 2rem;
+		font-size: 1.5rem;
+	}
+
+	.main__wrapper--imprintPanel > div {
+		flex-grow: 1;
+	}
+
+	.main__wrapper--imprintPanel > div:first-child {
+		text-align: center;
+	}
+
+	.main__wrapper--imprintPanel input[type='checkbox'] {
+		margin-left: 1rem;
+		margin-right: 10px;
+	}
+}

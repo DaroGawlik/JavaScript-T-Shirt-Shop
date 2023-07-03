@@ -1,0 +1,30 @@
+footer {
+	display: none;
+	position: relative;
+	height: 25%;
+
+	.footer__wrapper {
+		display: flex;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		height: 70%;
+		transform: translate(-50%, -50%);
+
+		.footer__wrapper--tShirtFront {
+			display: none;
+		}
+
+		.footer__wrapper--tShirtBack {
+			display: none;
+		}
+
+		.footer__wrapper--resumePanel {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			margin: 0 1rem 0 1rem;
+			font-size: 2rem;
+		}
+	}
+}
