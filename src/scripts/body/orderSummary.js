@@ -28,18 +28,35 @@ const checkboxes = document.querySelectorAll('.main__wrapper--summary input[type
 
 const buttonNext = document.querySelector('.nav__button--next')
 
+let placementTextGlobal
+let imageUrlGlobal
+let filterGlobal
+let isUserDataChanged = false
+let isUserAddressChanged = false
+let isUserShippingChanged = false
+
 export function cautchingChecksBoxesToOrderSummary(isCheckFront, isCheckBack) {
 	const placementText = isCheckFront && isCheckBack ? 'Both' : isCheckFront ? 'Front' : isCheckBack ? 'Back' : ''
+	if (placementTextGlobal !== placementText) {
+		document.querySelector('.main__wrapper--summary input[value=placementConfirmed]').checked = false
+	}
+	placementTextGlobal = placementText
+
 	placement.innerHTML = placementText
 	orderObject.picture.placement = placementText
 }
 
 export function cautchingPhotoToOrderSummary(image) {
-	const imageUrl = image.src
-	const id = imageUrl.split('/id/')[1].split('/')[0]
+	if (imageUrlGlobal !== image.src) {
+		document.querySelector('.main__wrapper--summary input[value=pictureConfirmed]').checked = false
+	}
+
+	imageUrlGlobal = image.src
+	const id = imageUrlGlobal.match(/\/id\/(\d+)\//)[1]
 	picture.innerHTML = 'ID ' + id
 	orderObject.picture.id = id
 }
+
 export function cautchingFilterToOrderSummary(selectedEffect) {
 	const blurRange = document.getElementById('blurRange')
 	const filterSelected =
@@ -47,21 +64,46 @@ export function cautchingFilterToOrderSummary(selectedEffect) {
 			? selectedEffect.charAt(0).toUpperCase() + selectedEffect.slice(1) + ' ' + blurRange.value
 			: selectedEffect.charAt(0).toUpperCase() + selectedEffect.slice(1)
 
+	if (filterGlobal !== filterSelected) {
+		document.querySelector('.main__wrapper--summary input[value=filterConfirmed]').checked = false
+	}
+	filterGlobal = filterSelected
 	filter.innerHTML = filterSelected
 	orderObject.picture.filter = filterSelected
 }
 
 export function cautchingUserDataToOrderSummary() {
 	userDataSourceInputs.forEach((input, index) => {
-		targetInputs[index].innerHTML = input.value
+		if (input.value !== targetInputs[index].innerHTML) {
+			isUserDataChanged = true
+			targetInputs[index].innerHTML = input.value
+		}
 	})
+	if (isUserDataChanged) {
+		userDataSourceInputs.forEach((input, index) => {
+			targetInputs[index].innerHTML = input.value
+		})
+		document.querySelector('.summary__userData input[value=userDataConfirmed]').checked = false
+		isUserDataChanged = false
+	}
 	cautchingAddressesToOrderSummary()
 }
 function cautchingAddressesToOrderSummary() {
 	addressesSourceInputs.forEach((input, index) => {
-		addressesTargetInputs[index].innerHTML = input.value
+		if (input.value !== addressesTargetInputs[index].innerHTML) {
+			isUserAddressChanged = true
+			addressesTargetInputs[index].innerHTML = input.value
+		}
 	})
+	if (isUserAddressChanged) {
+		addressesSourceInputs.forEach((input, index) => {
+			addressesTargetInputs[index].innerHTML = input.value
+		})
+		document.querySelector('.summary__userData input[value=userAddressConfirmed]').checked = false
+		isUserAddressChanged = false
+	}
 }
+
 export function cautchingShippingToOrderSummary() {
 	const summaryShipping = document.querySelector('.userData__userAddressShipping')
 	if (!document.querySelector('#shippingSelect input[value=curier]').checked) {
@@ -70,7 +112,18 @@ export function cautchingShippingToOrderSummary() {
 	} else {
 		summaryShipping.style.display = 'block'
 		shippingSourceInputs.forEach((input, index) => {
-			shippingTargetInputs[index].innerHTML = input.value
+			if (input.value !== shippingTargetInputs[index].innerHTML) {
+				isUserShippingChanged = true
+				shippingTargetInputs[index].innerHTML = input.value
+			}
+			if (isUserShippingChanged) {
+				summaryShipping.style.display = 'block'
+				shippingSourceInputs.forEach((input, index) => {
+					shippingTargetInputs[index].innerHTML = input.value
+				})
+				document.querySelector('.summary__userData input[value=userAddressShipping]').checked = false
+				isUserShippingChanged = false
+			}
 		})
 	}
 }
