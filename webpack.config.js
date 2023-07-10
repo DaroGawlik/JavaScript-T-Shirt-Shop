@@ -31,6 +31,10 @@ module.exports = arg => {
 					test: /\.scss$/,
 					use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
 				},
+				{
+					test: /\.(png|jpe?g)$/,
+					type: 'asset/resource',
+				},
 			],
 		},
 
