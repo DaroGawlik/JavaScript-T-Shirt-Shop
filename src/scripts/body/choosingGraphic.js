@@ -77,7 +77,7 @@ effectRadios.forEach(radio => {
 	})
 })
 
-export function setEffect(radio) {
+export const setEffect = radio => {
 	const selectedEffect = radio
 	const loremPicsums = document.querySelectorAll('img[alt="Lorem Picsum"]')
 	const blurRangeOption = document.querySelector('.graphicPanel__effect--blurRange')

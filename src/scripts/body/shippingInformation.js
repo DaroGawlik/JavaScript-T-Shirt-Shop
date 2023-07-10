@@ -1,4 +1,3 @@
-
 import { cautchingShippingToFooter } from './footer'
 import { orderObject } from './orderObject'
 const shippingSelect = document.querySelectorAll('#shippingSelect input')
@@ -23,7 +22,7 @@ let validHouseShip = false
 let validZip = false
 let validZipShip = false
 
-function checkName() {
+const checkName = () => {
 	const val = document.getElementById('name')
 	const isValid = val.value.length >= 2 && /^[A-Za-z]+$/.test(val.value)
 
@@ -33,7 +32,7 @@ function checkName() {
 	orderObject.userData.name = val.value
 }
 
-function checkSurname() {
+const checkSurname = () => {
 	const val = document.getElementById('surname')
 	const isValid = val.value.length >= 3 && /^[A-Za-z]+$/.test(val.value)
 
@@ -42,7 +41,7 @@ function checkSurname() {
 	validation()
 	orderObject.userData.surname = val.value
 }
-function checkNumber() {
+const checkNumber = () => {
 	const val = document.getElementById('phoneNumber')
 	const isValid = val.value === '' || /^\d{9,}$/.test(val.value)
 
@@ -51,7 +50,7 @@ function checkNumber() {
 	validation()
 	orderObject.userData.phoneNumber = val.value
 }
-function checkEmail() {
+const checkEmail = () => {
 	const val = document.getElementById('email')
 	const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val.value)
 
@@ -82,7 +81,7 @@ document.querySelectorAll('.blurAction').forEach(input =>
 	})
 )
 
-function checkcity() {
+const checkcity = () => {
 	const val = document.getElementById('city')
 	const isValid = val.value.length >= 3 && /^[A-Za-z]+$/.test(val.value)
 	validCity = isValid
@@ -99,7 +98,7 @@ function checkcity() {
 	orderObject.userAddress.city = val.value
 }
 
-function checkStreet() {
+const checkStreet = () => {
 	const val = document.getElementById('street')
 	const isValid = val.value.length >= 3 && /^[A-Za-z0-9\-\/]+$/.test(val.value)
 	validStreet = isValid
@@ -115,7 +114,7 @@ function checkStreet() {
 	validation()
 	orderObject.userAddress.street = val.value
 }
-function checkHouse() {
+const checkHouse = () => {
 	const val = document.getElementById('house')
 	const isValid = val.value.length > 0 && /^[A-Za-z0-9\-\/]+$/.test(val.value)
 	validHouse = isValid
@@ -131,7 +130,7 @@ function checkHouse() {
 	validation()
 	orderObject.userAddress.house = val.value
 }
-function checkZip() {
+const checkZip = () => {
 	const val = document.getElementById('zip')
 	const isValid = val.value.length > 4 && /^[0-9\-]+$/.test(val.value)
 	validZip = isValid
@@ -212,7 +211,7 @@ shippingSelect.forEach(radio => {
 	})
 })
 
-function resetShippingDataValidity() {
+const resetShippingDataValidity = () => {
 	;[validCityShip, validStreetShip, validHouseShip, validZipShip] = [false, false, false, false]
 	orderObject.userShipping = {
 		city: '',
@@ -222,7 +221,7 @@ function resetShippingDataValidity() {
 	}
 }
 
-export function validation() {
+export const validation = () => {
 	const isShippingAddressDisplayed =
 		document.querySelector('.addresses__userAddressesShipping').style.display === 'block'
 

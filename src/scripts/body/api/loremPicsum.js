@@ -4,7 +4,7 @@ import { cautchingPhotoToFooter } from '../footer.js'
 
 export const picsumPhotoArr = []
 
-export function getPhoto() {
+export const getPhoto = () => {
 	fetch('https://picsum.photos/500/300')
 		.then(response => {
 			const imageUrl = response.url
@@ -21,19 +21,19 @@ export function getPhoto() {
 		})
 }
 
-export function goToSecondPiscumPhoto() {
+export const goToSecondPiscumPhoto = () => {
 	cautchingPhotoToChoosingImprint(picsumPhotoArr[1])
 	cautchingPhotoToFooter(picsumPhotoArr[1])
 	cautchingPhotoToChoosingGraphic(picsumPhotoArr[1])
 }
 
-export function backPicsumPhoto() {
+export const backPicsumPhoto = () => {
 	cautchingPhotoToChoosingImprint(picsumPhotoArr[0])
 	cautchingPhotoToFooter(picsumPhotoArr[0])
 	cautchingPhotoToChoosingGraphic(picsumPhotoArr[0])
 }
 
-function deletePicsumPhotoInArr(image) {
+const deletePicsumPhotoInArr = image => {
 	picsumPhotoArr.push(image)
 	if (picsumPhotoArr.length > 2) {
 		picsumPhotoArr.shift()

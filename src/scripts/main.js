@@ -8,8 +8,4 @@ import './body/nav.js'
 import './body/footer.js'
 import { getPhoto } from './body/api/loremPicsum'
 
-let isCheckFront
-let isCheckBack
-let currentPrice
-
 getPhoto()

@@ -18,17 +18,17 @@ let loremPiscumBack
 let isCheckFront = false
 let isCheckBack = false
 
-function toggleFront() {
+const toggleFront = () => {
 	isCheckFront = !isCheckFront
 	isCheckBoth()
 }
 
-function toggleBack() {
+const toggleBack = () => {
 	isCheckBack = !isCheckBack
 	isCheckBoth()
 }
 
-function toggleBoth() {
+const toggleBoth = () => {
 	isCheckFront = !isCheckFront || !isCheckBack
 	isCheckBack = isCheckFront
 	checkFront.checked = isCheckFront
@@ -36,7 +36,7 @@ function toggleBoth() {
 	isCheckBoth()
 }
 
-function isCheckBoth() {
+const isCheckBoth = () => {
 	toggleFrontTshit()
 	toggleBackTshit()
 	checkBoth.checked = isCheckFront && isCheckBack
@@ -71,7 +71,7 @@ export const cautchingPhotoToChoosingImprint = image => {
 	}
 }
 
-function toggleFrontTshit() {
+const toggleFrontTshit = () => {
 	if (isCheckFront) {
 		if (!tShirtFrontImprint.contains(loremPiscumFront)) {
 			tShirtFrontImprint.appendChild(loremPiscumFront)
@@ -85,7 +85,7 @@ function toggleFrontTshit() {
 	toggleFrontTshitInChoosingGraphic(isCheckFront)
 }
 
-function toggleBackTshit() {
+const toggleBackTshit = () => {
 	if (isCheckBack) {
 		if (!tShirtBackImprint.contains(loremPiscumBack)) {
 			tShirtBackImprint.appendChild(loremPiscumBack)

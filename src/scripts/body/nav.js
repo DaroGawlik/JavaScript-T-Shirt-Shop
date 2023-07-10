@@ -25,7 +25,7 @@ buttonNext.addEventListener('click', () => {
 	}
 })
 
-function updateCarousel() {
+const updateCarousel = () => {
 	articles.forEach((article, index) => {
 		if (index === currentIndex) {
 			article.setAttribute('article-active', '')
@@ -42,7 +42,7 @@ function updateCarousel() {
 	}
 }
 
-export function changeButtonNextName(getCurrentIndex) {
+export const changeButtonNextName = getCurrentIndex => {
 	currentIndex = getCurrentIndex
 	const buttonNames = ['Next', 'Go to shipping', 'Place the order', 'Confirm the order']
 	const nextButtonIndex = Math.min(getCurrentIndex, buttonNames.length - 1)
@@ -60,11 +60,11 @@ export function changeButtonNextName(getCurrentIndex) {
 	hiddenFooter(currentIndex)
 }
 
-export function buttonPrevDisabled() {
+export const buttonPrevDisabled = () => {
 	buttonPrev.disabled = currentIndex === 0 ? true : false
 }
 
-export function buttonNextDisabled() {
+export const buttonNextDisabled = () => {
 	const isChecked = document.querySelectorAll('input[type="checkbox"]:checked').length < 1
 	buttonNext.disabled = isChecked
 	buttonNext.style.display = currentIndex === articles.length - 1 ? 'none' : 'block'

@@ -35,7 +35,7 @@ let isUserDataChanged = false
 let isUserAddressChanged = false
 let isUserShippingChanged = false
 
-export function cautchingChecksBoxesToOrderSummary(isCheckFront, isCheckBack) {
+export const cautchingChecksBoxesToOrderSummary = (isCheckFront, isCheckBack) => {
 	const placementText = isCheckFront && isCheckBack ? 'Both' : isCheckFront ? 'Front' : isCheckBack ? 'Back' : ''
 	if (placementTextGlobal !== placementText) {
 		document.querySelector('.main__wrapper--summary input[value=placementConfirmed]').checked = false
@@ -46,7 +46,7 @@ export function cautchingChecksBoxesToOrderSummary(isCheckFront, isCheckBack) {
 	orderObject.picture.placement = placementText
 }
 
-export function cautchingPhotoToOrderSummary(image) {
+export const cautchingPhotoToOrderSummary = image => {
 	if (imageUrlGlobal !== image.src) {
 		document.querySelector('.main__wrapper--summary input[value=pictureConfirmed]').checked = false
 	}
@@ -57,7 +57,7 @@ export function cautchingPhotoToOrderSummary(image) {
 	orderObject.picture.id = id
 }
 
-export function cautchingFilterToOrderSummary(selectedEffect) {
+export const cautchingFilterToOrderSummary = selectedEffect => {
 	const blurRange = document.getElementById('blurRange')
 	const filterSelected =
 		selectedEffect === 'blur'
@@ -72,7 +72,7 @@ export function cautchingFilterToOrderSummary(selectedEffect) {
 	orderObject.picture.filter = filterSelected
 }
 
-export function cautchingUserDataToOrderSummary() {
+export const cautchingUserDataToOrderSummary = () => {
 	userDataSourceInputs.forEach((input, index) => {
 		if (input.value !== targetInputs[index].innerHTML) {
 			isUserDataChanged = true
@@ -88,7 +88,7 @@ export function cautchingUserDataToOrderSummary() {
 	}
 	cautchingAddressesToOrderSummary()
 }
-function cautchingAddressesToOrderSummary() {
+const cautchingAddressesToOrderSummary = () => {
 	addressesSourceInputs.forEach((input, index) => {
 		if (input.value !== addressesTargetInputs[index].innerHTML) {
 			isUserAddressChanged = true
@@ -104,7 +104,7 @@ function cautchingAddressesToOrderSummary() {
 	}
 }
 
-export function cautchingShippingToOrderSummary() {
+export const cautchingShippingToOrderSummary = () => {
 	const summaryShipping = document.querySelector('.userData__userAddressShipping')
 	if (!document.querySelector('#shippingSelect input[value=curier]').checked) {
 		summaryShipping.style.display = 'none'
@@ -142,7 +142,7 @@ userDataEdit.forEach(button => {
 	})
 })
 
-function updateCarousel(currentIndex) {
+const updateCarousel = currentIndex => {
 	articles.forEach((article, index) => {
 		if (index === currentIndex) {
 			article.setAttribute('article-active', '')
@@ -155,11 +155,7 @@ function updateCarousel(currentIndex) {
 	buttonNextDisabled()
 }
 
-checkboxes.forEach(checkbox => {
-	checkbox.addEventListener('change', confirmOrder)
-})
-
-export function confirmOrder() {
+export const confirmOrder = () => {
 	let areAllChecked
 	if (!document.querySelector('#shippingSelect input[value=curier]').checked) {
 		const firstFiveCheckboxes = Array.from(checkboxes).slice(0, 5)
@@ -170,3 +166,6 @@ export function confirmOrder() {
 
 	buttonNext.disabled = !areAllChecked
 }
+checkboxes.forEach(checkbox => {
+	checkbox.addEventListener('change', confirmOrder)
+})

@@ -23,7 +23,7 @@ let shippingSelectGlobal = 0
 
 let currentPriceGlobal
 
-export function cautchingChecksBoxesToFooter(isCheckFront, isCheckBack) {
+export const cautchingChecksBoxesToFooter = (isCheckFront, isCheckBack) => {
 	isCheckFrontGlobal = isCheckFront
 	isCheckBackGlobal = isCheckBack
 
@@ -34,7 +34,7 @@ export function cautchingChecksBoxesToFooter(isCheckFront, isCheckBack) {
 	showCurrentPrice()
 }
 
-export function cautchingFilterToFooter(selectedEffect) {
+export const cautchingFilterToFooter = selectedEffect => {
 	const filterPrices = {
 		normal: 0,
 		grayscale: 2,
@@ -46,7 +46,7 @@ export function cautchingFilterToFooter(selectedEffect) {
 	showCurrentPrice()
 	cautchingFilterToOrderSummary(selectedEffect)
 }
-export function cautchingShippingToFooter(shippingSelect) {
+export const cautchingShippingToFooter = shippingSelect => {
 	shippingSelectGlobal = shippingSelect === 'curier' ? 5 : 0
 	if (shippingSelect !== 'sameAddress') {
 		showCurrentPrice()
@@ -70,14 +70,14 @@ export const cautchingPhotoToFooter = image => {
 	cautchingPhotoToOrderSummary(image)
 }
 
-function showCurrentPrice() {
+const showCurrentPrice = () => {
 	currentPriceGlobal = (isCheckFrontGlobal + isCheckBackGlobal) * 10 + filterPriceGlobal + shippingSelectGlobal
 
 	const priceElement = resumePanel.querySelector('span')
 	priceElement.textContent = currentPriceGlobal
 }
 
-export function hiddenFooter(currentIndex) {
+export const hiddenFooter = currentIndex => {
 	if (currentIndex === 4) {
 		footer.style.display = 'none'
 	} else {
