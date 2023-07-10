@@ -1,0 +1,54 @@
+.tShirtFront__Graphic,
+.tShirtBack__Graphic {
+	display: none;
+}
+
+.main__wrapper--graphicPanel {
+	min-width: 230px;
+	margin-left: 1rem;
+	font-size: 1.5rem;
+	.graphicPanel__changePhoto {
+		height: 30%;
+
+		.graphicPanel__changePhoto--buttons {
+			font-size: 4rem;
+			display: flex;
+			justify-content: space-around;
+			cursor: pointer;
+
+			.changePhoto__button--left {
+				display: none;
+			}
+		}
+	}
+
+	.graphicPanel__changePhoto > p {
+		white-space: nowrap;
+	}
+
+	.main__wrapper--graphicPanel--effects {
+		margin-top: 1rem;
+	}
+
+	.main__wrapper--graphicPanel--effects > label {
+		display: flex;
+		margin-top: 0.5rem;
+
+		> input {
+			margin-right: 0.5rem;
+		}
+	}
+
+	.graphicPanel__effect--blurRange {
+		display: none;
+		margin-top: 0.5rem;
+
+		.blurRange__current {
+			min-width: 1.5rem;
+		}
+	}
+
+	.graphicPanel__effect--blurRange > :last-child {
+		margin-left: 0.5rem;
+	}
+}

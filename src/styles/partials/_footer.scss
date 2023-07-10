@@ -11,12 +11,20 @@ footer {
 		height: 70%;
 		transform: translate(-50%, -50%);
 
-		.footer__wrapper--tShirtFront {
-			display: none;
-		}
-
+		.footer__wrapper--tShirtFront,
 		.footer__wrapper--tShirtBack {
 			display: none;
+			position: relative;
+
+			.footer__wrapper--tShirtLoremPiscumFront,
+			.footer__wrapper--tShirtLoremPiscumBack {
+				position: absolute;
+				height: 55px;
+				width: 55px;
+				top: 45%;
+				left: 48%;
+				transform: translate(-50%, -50%);
+			}
 		}
 
 		.footer__wrapper--resumePanel {

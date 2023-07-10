@@ -1,0 +1,39 @@
+.main__wrapper__summary {
+	max-height: none;
+	.main__wrapper--summary {
+		height: 100%;
+		width: 30rem;
+		p {
+			font-size: 1.5rem;
+			margin-bottom: 1rem;
+		}
+		span {
+			font-size: 1rem;
+		}
+
+		button {
+			margin-left: 1rem;
+		}
+		input {
+			margin-right: 0.5rem;
+		}
+		label,
+		button {
+			font-size: 1.2rem;
+		}
+
+		.summary__placement,
+		.summary__picture,
+		.summary__filter,
+		.userData__userData > div:first-child,
+		.userData__userAddress > div:first-child,
+		.userData__userAddressShipping > div:first-child {
+			display: flex;
+			justify-content: space-between;
+			margin-bottom: 0.2rem;
+		}
+		.userData__userAddressShipping {
+			display: none;
+		}
+	}
+}

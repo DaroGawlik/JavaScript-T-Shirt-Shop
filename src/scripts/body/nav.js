@@ -1,3 +1,8 @@
+import { validation } from './shippingInformation'
+import { cautchingUserDataToOrderSummary, cautchingShippingToOrderSummary, confirmOrder } from './orderSummary'
+import { hiddenFooter } from './footer'
+import { orderObject } from './orderObject'
+
 const buttonPrev = document.querySelector('.nav__button--prev')
 const buttonNext = document.querySelector('.nav__button--next')
 
@@ -27,24 +32,42 @@ function updateCarousel() {
 		} else {
 			article.removeAttribute('article-active')
 		}
-		buttonPrevDisabled()
-		buttonNextDisabled()
 	})
+
+	buttonPrevDisabled()
+	buttonNextDisabled()
+	changeButtonNextName(currentIndex)
+	if (currentIndex === 3) {
+		cautchingUserDataToOrderSummary()
+	}
 }
 
-function buttonPrevDisabled() {
-	if (currentIndex === 0) {
-		buttonPrev.disabled = true
-	} else {
-		buttonPrev.disabled = false
+export function changeButtonNextName(getCurrentIndex) {
+	currentIndex = getCurrentIndex
+	const buttonNames = ['Next', 'Go to shipping', 'Place the order', 'Confirm the order']
+	const nextButtonIndex = Math.min(getCurrentIndex, buttonNames.length - 1)
+	buttonNext.innerHTML = buttonNames[nextButtonIndex]
+	if (nextButtonIndex == 2) {
+		validation()
 	}
+	if (nextButtonIndex == 3) {
+		cautchingShippingToOrderSummary()
+		confirmOrder()
+	}
+	if (currentIndex == 4) {
+		console.log(orderObject)
+	}
+	hiddenFooter(currentIndex)
 }
-function buttonNextDisabled() {
-	if (currentIndex === articles.length - 1) {
-		buttonNext.disabled = true
-	} else {
-		buttonNext.disabled = false
-	}
+
+export function buttonPrevDisabled() {
+	buttonPrev.disabled = currentIndex === 0 ? true : false
+}
+
+export function buttonNextDisabled() {
+	const isChecked = document.querySelectorAll('input[type="checkbox"]:checked').length < 1
+	buttonNext.disabled = isChecked
+	buttonNext.style.display = currentIndex === articles.length - 1 ? 'none' : 'block'
 }
 
 window.addEventListener('load', event => {

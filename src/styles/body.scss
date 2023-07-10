@@ -1,4 +1,8 @@
 @import 'partials/section/choosingImprint';
+@import 'partials/section/choosingGraphic';
+@import 'partials/section/shippingInformation';
+@import 'partials/section/orderSummary';
+@import 'partials/section/finish';
 @import './partials/nav';
 @import './partials/footer';
 * {
@@ -38,11 +42,12 @@ h1 {
 		opacity: 0;
 		z-index: 0;
 		transition: opacity 200ms ease-in-out;
+		background-color: powderblue;
 	}
 
 	[article-active] {
-		opacity: 1;
-		z-index: 1;
+		opacity: 10;
+		z-index: 10;
 		transition-delay: 200ms;
 	}
 	main {
@@ -68,4 +73,8 @@ button {
 }
 button:disabled {
 	cursor: not-allowed;
+}
+
+.grayscale {
+	filter: grayscale(100%);
 }
