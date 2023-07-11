@@ -18,7 +18,7 @@ const checkInput = (input, isValidFn) => {
 const validationData = {
 	name: false,
 	surname: false,
-	phoneNumber: false,
+	phoneNumber: true,
 	email: false,
 	city: false,
 	street: false,
@@ -240,10 +240,10 @@ const resetShippingDataValidity = () => {
 		shippingData[key] = false
 	})
 	orderObject.userShipping = {
-		city: '',
-		street: '',
-		house: '',
-		zip: '',
+		cityShip: '',
+		streetShip: '',
+		houseShip: '',
+		zipShip: '',
 	}
 }
 

@@ -43,7 +43,8 @@ const isCheckBoth = () => {
 	cautchingChecksBoxesToFooter(isCheckFront, isCheckBack)
 	cautchingChecksBoxesToOrderSummary(isCheckFront, isCheckBack)
 
-	buttonNext.disabled = document.querySelectorAll('input[type="checkbox"]:checked').length < 1
+	buttonNext.disabled =
+		document.querySelectorAll('.main__wrapper--imprintPanel input[type="checkbox"]:checked').length < 1
 
 	const selectedRadio = document.querySelector('#effectSelect input[type="radio"]:checked')
 	const selectedValue = selectedRadio ? selectedRadio.value : ''

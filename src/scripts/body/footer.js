@@ -48,7 +48,7 @@ export const cautchingFilterToFooter = selectedEffect => {
 	cautchingFilterToOrderSummary(selectedEffect)
 }
 export const cautchingShippingToFooter = shippingSelect => {
-	shippingSelectGlobal = shippingSelect === 'curier' ? 5 : 0
+	shippingSelectGlobal = shippingSelect === 'curier' || shippingSelect === 'sameAddress' ? 5 : 0
 	if (shippingSelect !== 'sameAddress') {
 		showCurrentPrice()
 	}
