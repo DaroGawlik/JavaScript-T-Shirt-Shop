@@ -17,9 +17,9 @@ export const orderObject = {
 		zip: '',
 	},
 	userShipping: {
-		city: '',
-		street: '',
-		house: '',
-		zip: '',
+		cityShip: '',
+		streetShip: '',
+		houseShip: '',
+		zipShip: '',
 	},
 }

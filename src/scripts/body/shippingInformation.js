@@ -3,14 +3,7 @@ import { orderObject } from './orderObject'
 const shippingSelect = document.querySelectorAll('#shippingSelect input')
 const buttonNext = document.querySelector('.nav__button--next')
 
-let val
-let el
 let blurAction
-
-let validCityShip = false
-let validStreetShip = false
-let validHouseShip = false
-let validZipShip = false
 
 const checkInput = (input, isValidFn) => {
 	const isValid = isValidFn(input.value)
@@ -25,10 +18,8 @@ const checkInput = (input, isValidFn) => {
 const validationData = {
 	name: false,
 	surname: false,
-
 	phoneNumber: false,
 	email: false,
-
 	city: false,
 	street: false,
 	house: false,
@@ -41,11 +32,11 @@ const shippingData = {
 	zipShipping: false,
 }
 
-const validateAndAssignValue = (inputId, isValidFn, orderObjectInObject, orderObjectProperty, validFlag) => {
+const validateAndAssignValue = (inputId, isValidFn, orderWhatData, dataProperty, objectWithValids) => {
 	const input = document.querySelector(`#${inputId}`)
 	const isValid = checkInput(input, isValidFn)
-	orderObject[orderObjectInObject][orderObjectProperty] = input.value
-	validFlag[inputId] = isValid
+	orderObject[orderWhatData][dataProperty] = input.value
+	objectWithValids[inputId] = isValid
 	validation()
 }
 
