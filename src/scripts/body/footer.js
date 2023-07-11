@@ -8,7 +8,6 @@ const resumePanel = document.querySelector('.footer__wrapper--resumePanel')
 const tShirtFrontLoremPiscum = document.querySelector('.footer__wrapper--tShirtLoremPiscumFront')
 const tShirtBackLoremPiscum = document.querySelector('.footer__wrapper--tShirtLoremPiscumBack')
 
-//GRAPHIC STEP
 const tShirtFrontGraphic = document.querySelector('.tShirtFront__Graphic')
 const tShirtBackGraphic = document.querySelector('.tShirtBack__Graphic')
 
@@ -29,8 +28,10 @@ export const cautchingChecksBoxesToFooter = (isCheckFront, isCheckBack) => {
 
 	footer.style.display = isCheckFrontGlobal || isCheckBackGlobal ? 'flex' : 'none'
 
-	addFrontTshirt(isCheckFrontGlobal)
-	addBackTshirt(isCheckBackGlobal)
+	toggleTshirts(tShirtFront, isCheckFront)
+	toggleTshirts(tShirtFrontGraphic, isCheckFront)
+	toggleTshirts(tShirtBack, isCheckBack)
+	toggleTshirts(tShirtBackGraphic, isCheckBack)
 	showCurrentPrice()
 }
 
@@ -52,17 +53,9 @@ export const cautchingShippingToFooter = shippingSelect => {
 		showCurrentPrice()
 	}
 }
-
-const addFrontTshirt = isCheckFront => {
-	tShirtFront.style.display = isCheckFront ? 'flex' : 'none'
-	tShirtFrontGraphic.style.display = isCheckFront ? 'flex' : 'none'
+const toggleTshirts = (element, isCheck) => {
+	element.style.display = isCheck ? 'flex' : 'none'
 }
-
-const addBackTshirt = isCheckBack => {
-	tShirtBack.style.display = isCheckBack ? 'flex' : 'none'
-	tShirtBackGraphic.style.display = isCheckBack ? 'flex' : 'none'
-}
-
 export const cautchingPhotoToFooter = image => {
 	loremPiscumFront = image.cloneNode(true)
 	loremPiscumBack = image.cloneNode(true)
@@ -73,8 +66,7 @@ export const cautchingPhotoToFooter = image => {
 const showCurrentPrice = () => {
 	currentPriceGlobal = (isCheckFrontGlobal + isCheckBackGlobal) * 10 + filterPriceGlobal + shippingSelectGlobal
 
-	const priceElement = resumePanel.querySelector('span')
-	priceElement.textContent = currentPriceGlobal
+	resumePanel.querySelector('span').textContent = currentPriceGlobal
 }
 
 export const hiddenFooter = currentIndex => {

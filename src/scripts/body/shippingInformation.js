@@ -7,57 +7,166 @@ let val
 let el
 let blurAction
 
-let validName = false
-let validSurname = false
-
-let validPhone = false
-let validEmail = false
-
-let validCity = false
 let validCityShip = false
-let validStreet = false
 let validStreetShip = false
-let validHouse = false
 let validHouseShip = false
-let validZip = false
 let validZipShip = false
 
-const checkName = () => {
-	const val = document.getElementById('name')
-	const isValid = val.value.length >= 2 && /^[A-Za-z]+$/.test(val.value)
+const checkInput = (input, isValidFn) => {
+	const isValid = isValidFn(input.value)
 
-	validName = isValid
-	val.style.borderColor = isValid ? '' : 'red'
+	if (isValid) {
+		input.style.borderColor = ''
+	} else {
+		input.style.borderColor = 'red'
+	}
+	return isValid
+}
+const validationData = {
+	name: false,
+	surname: false,
+
+	phoneNumber: false,
+	email: false,
+
+	city: false,
+	street: false,
+	house: false,
+	zip: false,
+}
+const shippingData = {
+	cityShipping: false,
+	streetShipping: false,
+	houseShipping: false,
+	zipShipping: false,
+}
+
+const validateAndAssignValue = (inputId, isValidFn, orderObjectInObject, orderObjectProperty, validFlag) => {
+	const input = document.querySelector(`#${inputId}`)
+	const isValid = checkInput(input, isValidFn)
+	orderObject[orderObjectInObject][orderObjectProperty] = input.value
+	validFlag[inputId] = isValid
 	validation()
-	orderObject.userData.name = val.value
+}
+
+const checkName = () => {
+	validateAndAssignValue(
+		'name',
+		value => value.length >= 2 && /^[A-Za-z]+$/.test(value),
+		'userData',
+		'name',
+		validationData
+	)
 }
 
 const checkSurname = () => {
-	const val = document.getElementById('surname')
-	const isValid = val.value.length >= 3 && /^[A-Za-z]+$/.test(val.value)
-
-	validSurname = isValid
-	val.style.borderColor = isValid ? '' : 'red'
-	validation()
-	orderObject.userData.surname = val.value
+	validateAndAssignValue(
+		'surname',
+		value => value.length >= 3 && /^[A-Za-z]+$/.test(value),
+		'userData',
+		'surname',
+		validationData
+	)
 }
+
 const checkNumber = () => {
-	const val = document.getElementById('phoneNumber')
-	const isValid = val.value === '' || /^\d{9,}$/.test(val.value)
-
-	validPhone = isValid
-	val.style.borderColor = isValid ? '' : 'red'
-	validation()
-	orderObject.userData.phoneNumber = val.value
+	validateAndAssignValue(
+		'phoneNumber',
+		value => value === '' || /^\d{9,}$/.test(value),
+		'userData',
+		'phoneNumber',
+		validationData
+	)
 }
-const checkEmail = () => {
-	const val = document.getElementById('email')
-	const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val.value)
 
-	validEmail = isValid
-	val.style.borderColor = isValid ? '' : 'red'
-	validation()
-	orderObject.userData.email = val.value
+const checkEmail = () => {
+	validateAndAssignValue(
+		'email',
+		value => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value),
+		'userData',
+		'email',
+		validationData
+	)
+}
+
+const checkCity = () => {
+	validateAndAssignValue(
+		'city',
+		value => value.length >= 3 && /^[A-Za-z]+$/.test(value),
+		'userAddress',
+		'city',
+		validationData
+	)
+
+	if (document.querySelector('.addresses__userAddressesShipping').style.display == 'block') {
+		validateAndAssignValue(
+			'cityShipping',
+			value => value.length >= 3 && /^[A-Za-z]+$/.test(value),
+			'userShipping',
+			'cityShip',
+			shippingData
+		)
+	}
+}
+
+const checkStreet = () => {
+	validateAndAssignValue(
+		'street',
+		value => value.length >= 3 && /^[A-Za-z0-9\-\/]+$/.test(value),
+		'userAddress',
+		'street',
+		validationData
+	)
+
+	if (document.querySelector('.addresses__userAddressesShipping').style.display == 'block') {
+		validateAndAssignValue(
+			'streetShipping',
+			value => value.length >= 3 && /^[A-Za-z0-9\-\/]+$/.test(value),
+			'userShipping',
+			'streetShip',
+			shippingData
+		)
+	}
+}
+
+const checkHouse = () => {
+	validateAndAssignValue(
+		'house',
+		value => value.length > 0 && /^[A-Za-z0-9\-\/]+$/.test(value),
+		'userAddress',
+		'house',
+		validationData
+	)
+
+	if (document.querySelector('.addresses__userAddressesShipping').style.display == 'block') {
+		validateAndAssignValue(
+			'houseShipping',
+			value => value.length > 0 && /^[A-Za-z0-9\-\/]+$/.test(value),
+			'userShipping',
+			'houseShip',
+			shippingData
+		)
+	}
+}
+
+const checkZip = () => {
+	validateAndAssignValue(
+		'zip',
+		value => value.length > 4 && /^[0-9\-]+$/.test(value),
+		'userAddress',
+		'zip',
+		validationData
+	)
+
+	if (document.querySelector('.addresses__userAddressesShipping').style.display == 'block') {
+		validateAndAssignValue(
+			'zipShipping',
+			value => value.length > 4 && /^[0-9\-]+$/.test(value),
+			'userShipping',
+			'zipShip',
+			shippingData
+		)
+	}
 }
 
 document.querySelectorAll('.blurAction').forEach(input =>
@@ -75,84 +184,9 @@ document.querySelectorAll('.blurAction').forEach(input =>
 			case 'email':
 				checkEmail()
 				break
-			default:
-				break
-		}
-	})
-)
-
-const checkcity = () => {
-	const val = document.getElementById('city')
-	const isValid = val.value.length >= 3 && /^[A-Za-z]+$/.test(val.value)
-	validCity = isValid
-	val.style.borderColor = isValid ? '' : 'red'
-
-	if (document.querySelector('.addresses__userAddressesShipping').style.display == 'block') {
-		const valShi = document.getElementById('cityShipping')
-		const isValidShi = valShi.value.length >= 3 && /^[A-Za-z]+$/.test(valShi.value)
-		validCityShip = isValidShi
-		valShi.style.borderColor = isValidShi ? '' : 'red'
-		orderObject.userShipping.city = valShi.value
-	}
-	validation()
-	orderObject.userAddress.city = val.value
-}
-
-const checkStreet = () => {
-	const val = document.getElementById('street')
-	const isValid = val.value.length >= 3 && /^[A-Za-z0-9\-\/]+$/.test(val.value)
-	validStreet = isValid
-	val.style.borderColor = isValid ? '' : 'red'
-
-	if (document.querySelector('.addresses__userAddressesShipping').style.display == 'block') {
-		const valShi = document.getElementById('streetShipping')
-		const isValidShi = valShi.value.length >= 3 && /^[A-Za-z0-9\-\/]+$/.test(valShi.value)
-		validStreetShip = isValidShi
-		valShi.style.borderColor = isValidShi ? '' : 'red'
-		orderObject.userShipping.street = valShi.value
-	}
-	validation()
-	orderObject.userAddress.street = val.value
-}
-const checkHouse = () => {
-	const val = document.getElementById('house')
-	const isValid = val.value.length > 0 && /^[A-Za-z0-9\-\/]+$/.test(val.value)
-	validHouse = isValid
-	val.style.borderColor = isValid ? '' : 'red'
-
-	if (document.querySelector('.addresses__userAddressesShipping').style.display == 'block') {
-		const valShi = document.getElementById('houseShipping')
-		const isValidShi = valShi.value.length > 0 && /^[A-Za-z0-9\-\/]+$/.test(valShi.value)
-		validHouseShip = isValidShi
-		valShi.style.borderColor = isValidShi ? '' : 'red'
-		orderObject.userShipping.house = valShi.value
-	}
-	validation()
-	orderObject.userAddress.house = val.value
-}
-const checkZip = () => {
-	const val = document.getElementById('zip')
-	const isValid = val.value.length > 4 && /^[0-9\-]+$/.test(val.value)
-	validZip = isValid
-	val.style.borderColor = isValid ? '' : 'red'
-
-	if (document.querySelector('.addresses__userAddressesShipping').style.display == 'block') {
-		const valShi = document.getElementById('zipShipping')
-		const isValidShi = valShi.value.length > 4 && /^[0-9\-]+$/.test(valShi.value)
-		validZipShip = isValidShi
-		valShi.style.borderColor = isValidShi ? '' : 'red'
-		orderObject.userShipping.zip = valShi.value
-	}
-	validation()
-	orderObject.userAddress.zip = val.value
-}
-
-document.querySelectorAll('.blurAction').forEach(input =>
-	input.addEventListener('blur', e => {
-		switch (e.target.id) {
 			case 'city':
 			case 'cityShipping':
-				checkcity()
+				checkCity()
 				break
 			case 'street':
 			case 'streetShipping':
@@ -171,7 +205,6 @@ document.querySelectorAll('.blurAction').forEach(input =>
 		}
 	})
 )
-
 shippingSelect.forEach(radio => {
 	radio.addEventListener('change', function () {
 		const userShipping = document.querySelector('.addresses__userAddressesShipping')
@@ -200,7 +233,7 @@ shippingSelect.forEach(radio => {
 		if (shippingSelect == 'sameAddress' && isChecked.checked) {
 			sourceInputs.forEach((input, index) => {
 				targetInputs[index].value = input.value
-				checkcity()
+				checkCity()
 				checkStreet()
 				checkHouse()
 				checkZip()
@@ -212,7 +245,9 @@ shippingSelect.forEach(radio => {
 })
 
 const resetShippingDataValidity = () => {
-	;[validCityShip, validStreetShip, validHouseShip, validZipShip] = [false, false, false, false]
+	Object.keys(shippingData).forEach(key => {
+		shippingData[key] = false
+	})
 	orderObject.userShipping = {
 		city: '',
 		street: '',
@@ -225,11 +260,8 @@ export const validation = () => {
 	const isShippingAddressDisplayed =
 		document.querySelector('.addresses__userAddressesShipping').style.display === 'block'
 
-	const isBasicDataValid =
-		validName && validSurname && validPhone && validEmail && validCity && validStreet && validHouse && validZip
-
-	const isShippingDataValid =
-		isShippingAddressDisplayed && validCityShip && validStreetShip && validHouseShip && validZipShip
+	const isBasicDataValid = Object.values(validationData).every(value => value === true)
+	const isShippingDataValid = Object.values(shippingData).every(value => value === true)
 
 	buttonNext.disabled = !(isBasicDataValid && (!isShippingAddressDisplayed || isShippingDataValid))
 }

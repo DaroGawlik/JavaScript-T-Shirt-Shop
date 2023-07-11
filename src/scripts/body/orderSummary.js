@@ -144,12 +144,9 @@ userDataEdit.forEach(button => {
 
 const updateCarousel = currentIndex => {
 	articles.forEach((article, index) => {
-		if (index === currentIndex) {
-			article.setAttribute('article-active', '')
-		} else {
-			article.removeAttribute('article-active')
-		}
+		article.toggleAttribute('article-active', index === currentIndex)
 	})
+
 	changeButtonNextName(currentIndex)
 	buttonPrevDisabled()
 	buttonNextDisabled()

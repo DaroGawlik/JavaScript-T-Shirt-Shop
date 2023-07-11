@@ -27,11 +27,7 @@ buttonNext.addEventListener('click', () => {
 
 const updateCarousel = () => {
 	articles.forEach((article, index) => {
-		if (index === currentIndex) {
-			article.setAttribute('article-active', '')
-		} else {
-			article.removeAttribute('article-active')
-		}
+		article.toggleAttribute('article-active', index === currentIndex)
 	})
 
 	buttonPrevDisabled()
@@ -47,14 +43,14 @@ export const changeButtonNextName = getCurrentIndex => {
 	const buttonNames = ['Next', 'Go to shipping', 'Place the order', 'Confirm the order']
 	const nextButtonIndex = Math.min(getCurrentIndex, buttonNames.length - 1)
 	buttonNext.innerHTML = buttonNames[nextButtonIndex]
-	if (nextButtonIndex == 2) {
+	if (nextButtonIndex === 2) {
 		validation()
 	}
-	if (nextButtonIndex == 3) {
+	if (nextButtonIndex === 3) {
 		cautchingShippingToOrderSummary()
 		confirmOrder()
 	}
-	if (currentIndex == 4) {
+	if (currentIndex === 4) {
 		console.log(orderObject)
 	}
 	hiddenFooter(currentIndex)
@@ -69,7 +65,4 @@ export const buttonNextDisabled = () => {
 	buttonNext.disabled = isChecked
 	buttonNext.style.display = currentIndex === articles.length - 1 ? 'none' : 'block'
 }
-
-window.addEventListener('load', event => {
-	updateCarousel()
-})
+window.addEventListener('load', updateCarousel)
