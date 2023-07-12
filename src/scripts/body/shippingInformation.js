@@ -2,6 +2,12 @@ import { cautchingShippingToFooter } from './footer'
 import { orderObject } from './orderObject'
 const shippingSelect = document.querySelectorAll('#shippingSelect input')
 const buttonNext = document.querySelector('.nav__button--next')
+const addressInputs = document.querySelectorAll('.main__wrapper--addresses')
+const userShipping = document.querySelector('.addresses__userAddressesShipping')
+const checkbox = document.querySelector('#sameAddress')
+const isCheckedSameAddress = document.querySelector('#sameAddress input')
+const sourceInputs = document.querySelectorAll('.source-input')
+const targetInputs = document.querySelectorAll('.target-input')
 
 let blurAction
 
@@ -198,16 +204,9 @@ document.querySelectorAll('.blurAction').forEach(input =>
 )
 shippingSelect.forEach(radio => {
 	radio.addEventListener('change', function () {
-		const userShipping = document.querySelector('.addresses__userAddressesShipping')
-		const checkbox = document.querySelector('#sameAddress')
-		const isChecked = document.querySelector('#sameAddress input')
-
-		const sourceInputs = document.querySelectorAll('.source-input')
-		const targetInputs = document.querySelectorAll('.target-input')
-
 		const shippingSelect = this.value
 		if (shippingSelect == 'pickup') {
-			isChecked.checked = false
+			isCheckedSameAddress.checked = false
 			userShipping.style.display = 'none'
 			checkbox.style.display = 'none'
 			targetInputs.forEach(targetInput => {
@@ -221,7 +220,7 @@ shippingSelect.forEach(radio => {
 			checkbox.style.display = 'block'
 		}
 
-		if (shippingSelect == 'sameAddress' && isChecked.checked) {
+		if (shippingSelect == 'sameAddress' && isCheckedSameAddress.checked) {
 			sourceInputs.forEach((input, index) => {
 				targetInputs[index].value = input.value
 				checkCity()
@@ -230,10 +229,30 @@ shippingSelect.forEach(radio => {
 				checkZip()
 			})
 		}
+
+		addressInputs.forEach(function (input) {
+			isCheckedSameAddress.checked
+				? input.addEventListener('input', copySiblingValue)
+				: input.removeEventListener('input', copySiblingValue)
+		})
+
 		validation()
 		cautchingShippingToFooter(shippingSelect)
 	})
 })
+const copySiblingValue = event => {
+	const clickedInput = event.target
+	const copyAttributeValue = clickedInput.getAttribute('copy')
+	const siblingInput = document.querySelector(
+		clickedInput.closest('.addresses__userAddresses')
+			? `.addresses__userAddressesShipping input[copy="${copyAttributeValue}"]`
+			: `.addresses__userAddresses input[copy="${copyAttributeValue}"]`
+	)
+
+	if (siblingInput) {
+		siblingInput.value = clickedInput.value
+	}
+}
 
 const resetShippingDataValidity = () => {
 	Object.keys(shippingData).forEach(key => {
